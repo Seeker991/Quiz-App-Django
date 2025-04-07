@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quiz Results{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'results.css' %}">   
+    <div class="container">
+        <h2>Quiz Results</h2>
+        <p>Your score: {{ score }} out of {{ total_questions }}</p>
+
+        <h3>Detailed Results:</h3>
+        <ul>
+            {% for result in results %}
+                <li>
+                    <strong>Question:</strong> {{ result.question_text }}<br>
+                    <strong>Your Answer:</strong>
+                    {% if result.user_answer_text %}
+                        {{ result.user_answer_text }}
+                        {% if result.is_correct %}
+                            <span style="color: green;">(Correct)</span>
+                        {% else %}
+                            <span style="color: red;">(Incorrect)</span>
+                        {% endif %}
+                    {% endif %}
+                    <br>
+                    <strong>Correct Answer:</strong> {{ result.correct_answer_text }}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'Quiz' %}"><button>Take the Quiz Again</button></a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <p>&copy; 202348034</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%  load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %} <h1>Hello Khaya</h1>
+<link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+<div class="container">
+    <h4>Human Computer Interaction Daily Quiz</h4>
+    <p>If you are ready test your knowledge, start below</p>
+
+    <br>
+    <a href="{% url "Quiz" %}"><button>Start Quiz</button></a>
+    <br><br>
+
+    </div>
+</main>
+{% endblock %}
+{% block footer %}
+    <footer>
+        <p>&copy; 202348034</p>
+    </footer>
+{% endblock %}

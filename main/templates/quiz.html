@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'quiz.css' %}">
+    <div class="container">
+        <h2>Take the Quiz</h2>
+        <h4>Answer all the following questions:</h4>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+                <hr>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <p>&copy; 202348034</p>
+    </footer>
+{% endblock %}
