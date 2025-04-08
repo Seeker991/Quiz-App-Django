@@ -19,7 +19,7 @@ class QuizForm(forms.Form):
                 widget=forms.RadioSelect,
                 required=True
             )
-            self.correct_answers[str(question.id)] = question.correct_answer  # Store it
+            self.correct_answers[str(question.id)] = question.correct_answer  # Storing the correct answer
 
     def clean(self):
         cleaned_data = super().clean()

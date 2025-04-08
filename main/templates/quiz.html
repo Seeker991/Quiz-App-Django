@@ -9,7 +9,7 @@
     <div class="container">
         <h2>Take the Quiz</h2>
         <h4>Answer all the following questions:</h4>
-        <form method="post">
+        <form method="post" id = "quiz form">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group">
@@ -21,7 +21,7 @@
                 </div>
                 <hr>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+            <button type="submit" class="btn btn-primary btn-disabled" id = "submit-btn">Submit Quiz</button>
         </form>
     </div>
 {% endblock %}

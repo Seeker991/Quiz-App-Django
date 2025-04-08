@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device{e-width, initial-scale=1.0">
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+<div class="login-container">
+ <h2>Login</h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+         <form method="POST" action="{% url 'Login' %}">
+{% csrf_token %}
+        <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+</div>
+<div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+</div>
+<button type="submit" class="login-btn">Login</button>
+</form>
+<div class="forgot-password">
+    <a href="#">Forgot your password?</a>
+</div>
+</div>
+</body>
+{%endblock%}
+{% block footer%}
+    <footer>
+    <p>&copy; 202348034</p>
+ </footer>
+{% endblock %}
+</html>

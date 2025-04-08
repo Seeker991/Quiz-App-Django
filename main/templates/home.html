@@ -3,14 +3,18 @@
 
 {% block title %}Home{% endblock %}
 
-{% block header %} <h1>Hello Khaya</h1>
-<link rel="stylesheet" href="{% static 'home.css' %}">
+{% block header %} <h1>Hello World</h1>
 {% endblock %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'home.css' %}">
 <main>
+    {% if user.is_authenticated %}
+
 <div class="container">
-    <h4>Human Computer Interaction Daily Quiz</h4>
+    <header>Welcome back {{ user.username }}</header>
+    <h4>Welcome to the Human Computer Interaction Daily Quiz</h4>
     <p>If you are ready test your knowledge, start below</p>
 
     <br>
@@ -19,6 +23,7 @@
 
     </div>
 </main>
+{% endif %}
 {% endblock %}
 {% block footer %}
     <footer>

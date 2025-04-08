@@ -1,20 +1,41 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from .models import Question
 from .form import QuizForm
 
 def home(request):
     return render(request, 'home.html')
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page (e.g., user's dashboard)
+            return redirect('Home')  # Replace 'dashboard' with your actual URL name
+        else:
+            # Display an error message to the user
+            messages.error(request, 'Invalid username or password.')
+            return render(request, 'login.html')
+    else:
+        # If it's a GET request, just render the login form
+        return render(request, 'login.html')
+
 def quiz_view(request):
     questions = Question.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST': #POST is used to submit the form
+        # Check if the form is submitted with POST method
         form = QuizForm(questions, request.POST)
         if form.is_valid():
             score = form.get_score()
             total_questions = len(questions)
             correct_answers = form.get_correct_answers()
             user_answers = form.get_user_answers()
-            results = []
+            results = [] #results list to store question details
+            # Looping through each question and get the user's answer and correct answer
             for question in questions:
                 question_id = str(question.id)
                 user_answer_key = user_answers.get(question_id)
