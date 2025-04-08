@@ -9,6 +9,7 @@
     <div class="container">
         <h2>Take the Quiz</h2>
         <h4>Answer all the following questions:</h4>
+        <div id="timer">Time Remaining: <span id="time"></span></div>
         <form method="post" id = "quiz form">
             {% csrf_token %}
             {% for field in form %}
@@ -24,6 +25,27 @@
             <button type="submit" class="btn btn-primary btn-disabled" id = "submit-btn">Submit Quiz</button>
         </form>
     </div>
+    <script>
+        // Timer script
+        var timeLeft = 120; // 2 minutes to seconds
+        var timerElement = document.getElementById('time');
+        var submitButton = document.getElementById('submit-btn');
+
+        function updateTimer() {
+            var minutes = Math.floor(timeLeft / 60);
+            var seconds = timeLeft % 60;
+            timerElement.textContent = minutes + "m " + seconds + "s";
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                alert("Time's up! Submitting your quiz.");
+                document.getElementById('quiz form').submit();
+            }
+        }
+
+        var timerInterval = setInterval(updateTimer, 1200); // Update every second
+        </script>
 {% endblock %}
 
 {% block footer %}

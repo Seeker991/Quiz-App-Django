@@ -17,7 +17,7 @@ class QuizForm(forms.Form):
                 label=question.text,
                 choices=choices,
                 widget=forms.RadioSelect,
-                required=True
+                required=False
             )
             self.correct_answers[str(question.id)] = question.correct_answer  # Storing the correct answer
 
