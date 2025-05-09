@@ -21,7 +21,6 @@ def login_view(request):
             messages.error(request, 'Invalid username or password.')
             return render(request, 'login.html')
     else:
-        # If it's a GET request, just render the login form
         return render(request, 'login.html')
 
 def quiz_view(request):
